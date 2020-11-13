@@ -1,14 +1,14 @@
-GET http://localhost:5000/helloclass HTTP/1.1
+GET http://localhost:5000/hello HTTP/1.1
 
 POST http://localhost:5000/user HTTP/1.1
-Content-Type: : application/json
+content-type: application/json
 
 {
-    "user_email":"user@test.com",
-    "password":"mysecret",
-    "name":"User Test",
+    "email":"user@example.com",
+    "password":"mypass",
+    "name":"name",
     "type_user":1,
     "university":"{'text':'Universidade Federal do Maranhão', 'value':'1'}",
     "degree":"{'text':'Graduação', 'value':'1'}",
-    "course":"{'text':'Universidade Federal do Maranhão','value':'1'}"
+    "course":"{'text':'Engenharia da Computação', 'value':'1'}"
 }

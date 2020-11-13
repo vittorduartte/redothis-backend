@@ -1,16 +1,15 @@
 from flask import Flask
-from .ext import database as db
-from .ext import marshmallow as ma
-from .routes import users
-
+from .resources import users
+from .extensions import database
 
 def create_app():
     app = Flask(__name__)
+    app.config['SECRET_KEY']='1234567890'
+    app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///database.db'
 
 #   Iniciando as extensões
-    db.init(app)
-    ma.init(app)
-
+    database.init(app)
+    
 #   Iniciando as rotas
     users.init(app)
 
