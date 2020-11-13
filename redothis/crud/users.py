@@ -1,11 +1,12 @@
 from flask import request, jsonify
 from werkzeug.security import generate_password_hash
-from ..ext.database import db
-from ..models.user import User, user_schema, users_schema
+from ..extensions.database import database
+from ..models.users import Users, user_schema, users_schema
 
 
-def post_user():
-    user_email = request.json['user_email']
+def register_user():
+    print("\n\n\n\n"+request.args+"\n\n\n\n")
+    email = request.json['email']
     password = request.json['password']
     name = request.json['name']
     type_user = request.json['type_user']
@@ -13,7 +14,7 @@ def post_user():
     degree = request.json['degree']
     course = request.json['course']
     password_hash = generate_password_hash(password)
-    user = User(user_email,
+    user = User(email,
                 password_hash,
                 name,
                 type_user,
@@ -23,6 +24,7 @@ def post_user():
                 )
 
     try:
+        print(password_hash)
         db.session.add(user)
         db.session.commit()
         result = user_schema.dump(user)
@@ -31,4 +33,3 @@ def post_user():
 
     except:
         return jsonify({'message': 'unable to create', 'data': {}}), 500
-        

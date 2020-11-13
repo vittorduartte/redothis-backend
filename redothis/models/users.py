@@ -1,11 +1,10 @@
 import datetime
-from ..ext.database import db
-from ..ext.marshmallow import ma
+from ..extensions.database import database as db
+from ..extensions.marshmallow import marsh
 
-
-class User(db.Model):
+class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_email = db.Column(db.String(50), unique=True, nullable=False)
+    email = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     type_user = db.Column(db.Integer, nullable=False)
@@ -14,9 +13,8 @@ class User(db.Model):
     course = db.Column(db.String(200), nullable=False)
     create_on = db.Column(db.DateTime, default=datetime.datetime.now())
 
-    def __init__(self, user_email, password, name, 
-                 type_user, university, degree, course):
-        self.user_email = user_email
+    def __init__(self, email, password, name, type_user, university, degree, course):
+        self.email = user_email
         self.password = password
         self.name = name
         self.type_user = type_user
@@ -24,12 +22,9 @@ class User(db.Model):
         self.degree = degree
         self.course = course
 
-
-class UsersSchema(ma.Schema):
+class UsersSchema(marsh.Schema):
     class Meta:
-        fields = ('id', 'user_email', 'password', 'name', 'type_user', 
-                  'university', 'degree', 'course', 'created_on')
-
+        fields = ('id', 'email', 'password', 'name', 'type_user', 'university', 'degree', 'course', 'create_on')
 
 user_schema = UsersSchema()
 users_schema = UsersSchema(many=True)

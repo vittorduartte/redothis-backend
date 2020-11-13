@@ -1,7 +1,7 @@
 {
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
-    "python.linting.enabled": true,
+    "python.linting.enabled": false,
     "sqltools.connections": [
         {
             "previewLimit": 50,
@@ -9,5 +9,6 @@
             "name": "redothis",
             "database": "/home/vittorduartte/Documentos/redothis/redothis-database-development/database.sqlite"
         }
-    ]
+    ],
+    "python.pythonPath": "/home/vittorduartte/.local/share/virtualenvs/redothis-backend-uzCGUhQy/bin/python"
 }
