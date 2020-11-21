@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from ..extensions.database import database as db
 from ..models.users import User, user_schema, users_schema
 
@@ -35,3 +35,17 @@ def register_user():
 
     except:
         return jsonify({'message': 'unable to create', 'data':False}), 500
+
+def auth_user():
+    auth = request.authorization
+    exists_user = User.query.filter_by(email=auth.username).first()
+
+    if exists_user:
+        if check_password_hash(exists_user.password, auth.password):
+                return jsonify({'message': 'user exists', 'data': user_schema.dump(exists_user)}) 
+        else:
+                return jsonify({'message': 'wrong_password', 'data': False})
+    else:
+        return jsonify({
+            'message': 'user not exists', 'data': False
+        })

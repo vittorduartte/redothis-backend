@@ -1,6 +1,6 @@
 from flask import Flask
 from .resources import users
-from .extensions import database
+from .extensions import database, cors
 
 def create_app():
     app = Flask(__name__)
@@ -9,6 +9,7 @@ def create_app():
 
 #   Iniciando as extensões
     database.init(app)
+    cors.init(app)
     
 #   Iniciando as rotas
     users.init(app)
