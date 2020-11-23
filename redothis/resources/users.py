@@ -1,16 +1,24 @@
-from flask import jsonify, request
-from ..crud.users import register_user, auth_user
+from flask import jsonify, request, Blueprint
+from ..crud.users import register_user, auth_user, get_students_by_university
 
 def init(app):
-    @app.route('/hello')
-    def hello():
-        return jsonify({'message':'Hello class!'}), 200
 
-    @app.route('/user', methods=['POST'])
+    bp = Blueprint('users', __name__)
+
+    @bp.route('/auth', methods=['POST'])
+    def auth():
+        return auth_user()
+
+    @bp.route('/user', methods=['POST'])
     def register():
         return register_user()
 
-    @app.route('/auth', methods=['POST'])
-    def auth():
-        return auth_user()
+    @bp.route('/users', methods=['GET'])
+    def users_by_university():
+        return get_students_by_university()
+    
+    app.register_blueprint(bp, url_prefix="/api/v1")
+
+
+    
 

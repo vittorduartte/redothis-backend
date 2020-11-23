@@ -36,16 +36,27 @@ def register_user():
     except:
         return jsonify({'message': 'unable to create', 'data':False}), 500
 
+def get_students_by_university():
+    university = request.json['university']
+    university_users = User.query.filter_by(university=university)
+
+    if university_users.first():
+        return jsonify({'message': 'success', 'data': users_schema.dump(university_users)}), 200
+    else:
+        return jsonify({'message': 'users_not_exists', 'data': False}), 200
+
+
+
 def auth_user():
     auth = request.authorization
     exists_user = User.query.filter_by(email=auth.username).first()
 
     if exists_user:
         if check_password_hash(exists_user.password, auth.password):
-                return jsonify({'message': 'user exists', 'data': user_schema.dump(exists_user)}) 
+                return jsonify({'message': 'success', 'data': user_schema.dump(exists_user)}), 200
         else:
-                return jsonify({'message': 'wrong_password', 'data': False})
+                return jsonify({'message': 'wrong_password', 'data': False}), 200
     else:
         return jsonify({
-            'message': 'user not exists', 'data': False
-        })
+            'message': 'user_not_exists', 'data': False
+        }), 200
