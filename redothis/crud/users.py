@@ -1,7 +1,7 @@
 from flask import request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from ..extensions.database import database as db
-from ..models.users import User, user_schema, users_schema
+from ..models import User, user_schema, users_schema
 
 
 def register_user():
@@ -24,6 +24,7 @@ def register_user():
                 )
     
     exists_user = User.query.filter_by(email=email).first()
+
     if exists_user:
         return jsonify({'message':'user already exists', 'data':{'email': False}}), 500
 
@@ -38,7 +39,8 @@ def register_user():
 
 def get_students_by_university():
     university = request.json['university']
-    university_users = User.query.filter_by(university=university)
+    course = request.json['course']
+    university_users = User.query.filter_by(university=university, course=course)
 
     if university_users.first():
         return jsonify({'message': 'success', 'data': users_schema.dump(university_users)}), 200
@@ -51,7 +53,11 @@ def auth_user():
     auth = request.authorization
     exists_user = User.query.filter_by(email=auth.username).first()
 
+
     if exists_user:
+        print('\n\n')
+        print(auth)
+        print('\n\n'+exists_user.password+'\n\n')
         if check_password_hash(exists_user.password, auth.password):
                 return jsonify({'message': 'success', 'data': user_schema.dump(exists_user)}), 200
         else:
