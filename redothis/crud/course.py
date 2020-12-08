@@ -29,3 +29,13 @@ def get_all_courses():
         return jsonify({'message': 'success', 'data': courses_schema.dump(all_courses_selected)})
     except:
         return jsonify({'message': 'Erro', 'data': False})
+
+def get_course_by_id():
+    course_id = request.json["course_id"]
+
+    course = Course.query.filter_by(id=course_id).first()
+
+    if course:
+        return jsonify({'message': 'success', 'data': course_schema.dump(course)}), 200
+    else:
+        return jsonify({'message': '_invalid_course_id_', 'data': False}), 200

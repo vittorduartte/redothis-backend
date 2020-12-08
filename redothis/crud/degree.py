@@ -27,3 +27,13 @@ def get_all_degrees():
         return jsonify({'message': 'success', 'data': degrees_schema.dump(all_degrees)})
     except err:
         return jsonify({'message': err, 'data': False})
+
+def get_degree_by_id():
+    degree_id = request.json["degree_id"]
+
+    degree = Degree.query.filter_by(id=degree_id).first()
+
+    if degree:
+        return jsonify({'message': 'success', 'data': degree_schema.dump(degree)}), 200
+    else:
+        return jsonify({'message': '_invalid_degree_id_', 'data': False}), 200

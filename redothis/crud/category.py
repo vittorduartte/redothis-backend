@@ -27,3 +27,14 @@ def get_all_categories():
                         'data': categories_schema.dump(all_categories)})
     except:
         return jsonify({'message': 'error on transaction', 'data': False})
+
+
+def get_category_by_id():
+    category_id = request.json["category_id"]
+
+    category = Category.query.filter_by(id=category_id).first()
+
+    if category:
+        return jsonify({'message': 'success', 'data': category_schema.dump(category)}), 200
+    else:
+        return jsonify({'message': '_invalid_category_id_', 'data': False}), 200
