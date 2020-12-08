@@ -1,5 +1,5 @@
 from flask import Flask
-from .resources import users, courses, degrees, projects, categories, submissions, revisions
+from .resources import users, courses, degrees, projects, categories, submissions, revisions, knowledge_areas
 from .extensions import database, cors
 
 def create_app():
@@ -19,5 +19,6 @@ def create_app():
     categories.init(app)
     submissions.init(app)
     revisions.init(app)
+    knowledge_areas.init(app)
 
     return app

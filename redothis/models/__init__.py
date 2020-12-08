@@ -24,17 +24,10 @@ class User(db.Model):
         self.course_id = course_id
 
 
-class UserSchema(marsh.SQLAlchemySchema):
+class UserSchema(marsh.SQLAlchemyAutoSchema):
     class Meta:
         model = User
-
-    id = marsh.auto_field()
-    email = marsh.auto_field()
-    name = marsh.auto_field()
-    type_user = marsh.auto_field()
-    degree_id = marsh.auto_field()
-    course_id = marsh.auto_field()
-
+        
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 
