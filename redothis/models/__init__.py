@@ -54,6 +54,7 @@ class User(db.Model):
     password = db.Column(db.String(200), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     type_user = db.Column(db.Integer, nullable=False)
+    university_id = db.Column(db.Integer, db.ForeignKey('university.id', nullable=False))
     degree_id = db.Column(db.Integer, db.ForeignKey('degree.id'), nullable=False)
     course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
     create_on = db.Column(db.DateTime, default=datetime.datetime.now())
@@ -80,6 +81,7 @@ class Project(db.Model):
     subtitle = db.Column(db.String(500), nullable=True)
     category = db.Column(db.String(200), nullable=True)
     knowledge_area = db.Column(db.String(200), nullable=True)
+    create_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     create_on = db.Column(db.DateTime, default=datetime.datetime.now())
     authors = db.relationship('Author', backref="project", lazy=True)
 
