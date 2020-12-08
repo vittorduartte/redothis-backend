@@ -36,4 +36,4 @@ def get_user_projects():
     if user_projects.first():
         return jsonify({'message': 'success', 'data': project_schemas.dump(user_projects)}), 200
     else:
-        return jsonify({'message': 'users_not_exists', 'data': False}), 200
+        return jsonify({'message': '_no_projects_', 'data': False}), 200
