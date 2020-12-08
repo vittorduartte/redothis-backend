@@ -19,14 +19,13 @@ def register_course():
         return jsonify({'message': 'resource created',
                         'data': course_schema.dump(course)}), 201
     except:
-        return jsonify({'message': err, 'data': False})
+        return jsonify({'message': 'Erro', 'data': False})
 
 
-def get_all_courses_by_university():
-    id_university = request.json['id_university']
+def get_all_courses():
     
     try:
-        all_courses_selected = Degree.query.order_by(Degree.name).all()
+        all_courses_selected = Course.query.order_by(Course.name).all()
         return jsonify({'message': 'success', 'data': courses_schema.dump(all_courses_selected)})
-    except err:
-        return jsonify({'message': err, 'data': False})
+    except:
+        return jsonify({'message': 'Erro', 'data': False})
