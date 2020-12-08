@@ -9,6 +9,7 @@ marshmallow-sqlalchemy = "*"
 flask-marshmallow = "*"
 python-dotenv = "*"
 flask-cors = "*"
+flask-migrate = "*"
 
 [dev-packages]
 python-dotenv = "*"

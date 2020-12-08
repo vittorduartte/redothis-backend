@@ -47,9 +47,9 @@ class Degree(db.Model):
         self.name = name
 
 
-class DegreeSchema(marsh.Schema):
+class DegreeSchema(marsh.SQLAlchemyAutoSchema):
     class Meta:
-        fields = ('id', 'name')
+        model = Degree
 
 
 degree_schema = DegreeSchema()
@@ -59,7 +59,6 @@ degrees_schema = DegreeSchema(many=True)
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(50), nullable=False)
-    users = db.relationship('User', backref='course', lazy=True)
 
     def __init__(self, name):
         self.name = name
@@ -68,7 +67,6 @@ class Course(db.Model):
 class CourseSchema(marsh.SQLAlchemyAutoSchema):
     class Meta:
         model = Course
-        include_fk = True
 
 course_schema = CourseSchema()
 courses_schema = CourseSchema(many=True)
@@ -78,8 +76,8 @@ class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(200), nullable=True)
     subtitle = db.Column(db.String(500), nullable=True)
-    category = db.Column(db.String(200), nullable=True)
-    knowledge_area = db.Column(db.String(200), nullable=True)
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=True)
+    knowledge_area_id = db.Column(db.Integer, db.ForeignKey('knownledgearea.id'), nullable=True)
     create_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     create_on = db.Column(db.DateTime, default=datetime.datetime.now())
     authors = db.relationship('Author', backref="project", lazy=True)
@@ -109,3 +107,33 @@ class Author(db.Model):
     def __init__(self, author_id, project_id):
         self.author_id = author_id
         self.project_id = project_id
+
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(50), nullable=False)
+
+    def __init__(self, name):
+        self.name = name
+
+class CategorySchema(marsh.SQLAlchemyAutoSchema):
+    class Meta():
+        model = Category
+
+category_schema = CategorySchema()
+categorys_schema = CategorySchema(many=True)
+
+class KnowledgeArea(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(50), nullable=False)
+
+    def __init__(self, name):
+        self.name = name
+
+class KnowledgeAreaSchema(marsh.SQLAlchemyAutoSchema):
+    class Meta():
+        model = KnowledgeArea
+
+knowledgeArea_schema = KnowledgeAreaSchema()
+knowledgeAreas_schema = KnowledgeAreaSchema(many=True)
+
+    
