@@ -24,13 +24,11 @@ def register_project():
             db.session.add(student_author)
             db.session.add(tutor_author)
             db.session.commit()
-            return jsonify(project_schema.dump(project)), 201
+            return jsonify({'message':'resource created', 'data':project_schema.dump(project)}), 201
         except Exception as e:
             return jsonify({'message':'error on transaction', 'data':False}), 200
 
-def get_user_projects():
-    user_id = request.param.get("user")
-
+def get_projects_by_user(user_id):
     user_projects = Project.query.join(Author, Project.id == Author.project_id).join(Category, Project.category == Category.id).join(KnowledgeArea, Project.knowledge_area == KnowledgeArea.id).add_columns(Category.name, KnowledgeArea.name).filter(Author.author_id == user_id).all()
     
     dumped_results = []

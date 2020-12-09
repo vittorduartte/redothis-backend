@@ -1,5 +1,6 @@
 from flask import jsonify, request, Blueprint
 from ..crud.users import register_user, auth_user, get_students_by_course, get_user_by_id
+from ..crud.projects import get_projects_by_user
 
 def init(app):
 
@@ -20,6 +21,11 @@ def init(app):
     @bp.route('/get_user', methods=['GET'])
     def get_user():
         return get_user_by_id()
+    
+    @bp.route('/user/<id:id_usuario>/projects', methods=['GET'])
+    def get_projects_from_user():
+        return get_projects_by_user(id_usuario) 
+
     
     app.register_blueprint(bp, url_prefix="/api/v1")
 

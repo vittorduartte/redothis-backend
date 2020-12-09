@@ -37,7 +37,8 @@ def register_user():
 
 def get_students_by_course():
     course_id = request.args.get("course")
-    course_users = User.query.filter_by(course_id=course_id, type_user=0)
+    type_user = 0 if request.args.get("type") == 'student' else 1
+    course_users = User.query.filter_by(course_id=course_id, type_user=type_user)
 
     if course_users.first():
         return jsonify({'message': 'success', 'data': users_schema.dump(course_users)}), 200
