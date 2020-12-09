@@ -7,14 +7,17 @@ def register_project():
     subtitle = request.json['subtitle']
     category = request.json['category']
     knowledge_area = request.json['knowledge_area']
-    student = request.json['student']
-    tutor = request.json['tutor']
+    students = request.json['students']
+    tutors = request.json['tutors']
+    create_by = request.json['create_by']
 
-    project = Project(title, subtitle, category, knowledge_area, tutor)
+    project = Project(title, subtitle, category, knowledge_area, create_by)
     db.session.add(project)
 
-    student_in_process = Author.query.filter_by(author_id=student).first()
+    for s in students:
+        student_in_process = Author.query.filter_by(author_id=s).first()
 
+<<<<<<< HEAD
     if(student_in_process):
         return jsonify({'message':'user already working', 'data':False}), 200
     else:
@@ -27,6 +30,23 @@ def register_project():
             return jsonify({'message':'resource created', 'data':project_schema.dump(project)}), 201
         except Exception as e:
             return jsonify({'message':'error on transaction', 'data':False}), 200
+=======
+        if(student_in_process):
+            return jsonify({'message':'user already working', 'data':False}), 200        
+        
+    try:
+        db.session.add(Author(create_by, project.id))
+        for s in students:
+            db.session.add(Author(s, project.id))
+        for t in tutors:
+            db.session.add(Author(t, project.id))
+
+        db.session.commit()
+        return jsonify(project_schema.dump(project)), 201
+    except Exception as e:
+        print(e)
+        return jsonify({'message':'error on transaction', 'data':False}), 200
+>>>>>>> a1bb13491fa65568b8544fb5ef5bf7417324850f
 
 def get_projects_by_user(user_id):
     user_projects = Project.query.join(Author, Project.id == Author.project_id).join(Category, Project.category == Category.id).join(KnowledgeArea, Project.knowledge_area == KnowledgeArea.id).add_columns(Category.name, KnowledgeArea.name).filter(Author.author_id == user_id).all()
