@@ -7,26 +7,31 @@ def register_project():
     subtitle = request.json['subtitle']
     category = request.json['category']
     knowledge_area = request.json['knowledge_area']
-    student = request.json['student']
-    tutor = request.json['tutor']
+    students = request.json['students']
+    tutors = request.json['tutors']
+    create_by = request.json['create_by']
 
-    project = Project(title, subtitle, category, knowledge_area, tutor)
+    project = Project(title, subtitle, category, knowledge_area, create_by)
     db.session.add(project)
 
-    student_in_process = Author.query.filter_by(author_id=student).first()
+    for s in students:
+        student_in_process = Author.query.filter_by(author_id=s).first()
 
-    if(student_in_process):
-        return jsonify({'message':'user already working', 'data':False}), 200
-    else:
-        student_author = Author(student, project.id)
-        tutor_author = Author(tutor, project.id)
-        try:
-            db.session.add(student_author)
-            db.session.add(tutor_author)
-            db.session.commit()
-            return jsonify(project_schema.dump(project)), 201
-        except Exception as e:
-            return jsonify({'message':'error on transaction', 'data':False}), 200
+        if(student_in_process):
+            return jsonify({'message':'user already working', 'data':False}), 200        
+        
+    try:
+        db.session.add(Author(create_by, project.id))
+        for s in students:
+            db.session.add(Author(s, project.id))
+        for t in tutors:
+            db.session.add(Author(t, project.id))
+
+        db.session.commit()
+        return jsonify(project_schema.dump(project)), 201
+    except Exception as e:
+        print(e)
+        return jsonify({'message':'error on transaction', 'data':False}), 200
 
 def get_user_projects():
     user_id = request.param.get("user")
