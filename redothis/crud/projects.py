@@ -1,6 +1,6 @@
 from flask import request, jsonify
 from ..extensions.database import database as db
-from ..models import Project, Author, Category, KnowledgeArea, project_schema, project_schemas
+from ..models import Project, User, Author, Category, KnowledgeArea, project_schema, project_schemas, users_schema
 
 def register_project():
     title = request.json['title']
@@ -32,17 +32,26 @@ def get_user_projects():
     user_id = request.json['user_id']
 
     user_projects = Project.query.join(Author, Project.id == Author.project_id).join(Category, Project.category == Category.id).join(KnowledgeArea, Project.knowledge_area == KnowledgeArea.id).add_columns(Category.name, KnowledgeArea.name).filter(Author.author_id == user_id).all()
-
-    print(">>>", user_projects)
     
     dumped_results = []
     
     if user_projects:
         for p in user_projects:
-            print(p)
             project_dumped = project_schema.dump(p[0])
             project_dumped['category'] = p[1]
             project_dumped['knowledge_area'] = p[2]
+
+            authors = User.query.join(Author, Author.author_id == User.id).filter(Author.project_id == project_dumped['id']).all()
+            authors_list = users_schema.dump(authors)
+
+            project_dumped['thesis_advisors'] = []
+
+            for a in authors_list:
+                if a['type_user'] == 0:
+                    project_dumped['student'] = a['name']
+                else:
+                    project_dumped['thesis_advisors'].append(a['name'])
+            
             dumped_results.append(project_dumped)
         
         return jsonify({'message': 'success', 'data': dumped_results}), 200
