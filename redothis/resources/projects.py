@@ -4,12 +4,11 @@ from ..crud.projects import register_project, get_user_projects
 def init(app):
     bp = Blueprint('projects', __name__)
 
-    @bp.route('/register_project', methods=['POST'])
+    @bp.route('/project', methods=['GET', 'POST'])
     def register():
-        return register_project()
-
-    @bp.route('/get_projects', methods=['GET'])
-    def get_projects():
-        return get_user_projects()
+        if request.method == 'POST':
+            return register_project()
+        else:
+            return get_user_projects()
     
     app.register_blueprint(bp, url_prefix="/api/v1")

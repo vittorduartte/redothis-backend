@@ -29,7 +29,7 @@ def register_project():
             return jsonify({'message':'error on transaction', 'data':False}), 200
 
 def get_user_projects():
-    user_id = request.json['user_id']
+    user_id = request.param.get("user")
 
     user_projects = Project.query.join(Author, Project.id == Author.project_id).join(Category, Project.category == Category.id).join(KnowledgeArea, Project.knowledge_area == KnowledgeArea.id).add_columns(Category.name, KnowledgeArea.name).filter(Author.author_id == user_id).all()
     

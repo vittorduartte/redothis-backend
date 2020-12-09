@@ -13,7 +13,7 @@ def init(app):
     def register():
         return register_user()
 
-    @bp.route('/course/users', methods=['GET'])
+    @bp.route('/users', methods=['GET'])
     def users_by_course():
         return get_students_by_course()
 
