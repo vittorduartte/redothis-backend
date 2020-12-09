@@ -22,8 +22,8 @@ def init(app):
     def get_user():
         return get_user_by_id()
     
-    @bp.route('/user/<id:id_usuario>/projects', methods=['GET'])
-    def get_projects_from_user():
+    @bp.route('/user/<int:id_usuario>/projects', methods=['GET'])
+    def get_projects_from_user(id_usuario):
         return get_projects_by_user(id_usuario) 
 
     
