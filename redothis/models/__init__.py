@@ -24,10 +24,12 @@ class User(db.Model):
         self.course_id = course_id
 
 
-class UserSchema(marsh.SQLAlchemyAutoSchema):
+class UserSchema(marsh.Schema):
     class Meta:
-        model = User
-        
+        fields = ('id', 'email', 'password', 'name', 'type_user',
+                  'degree_id', 'course_id', 'create_on')
+
+
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 
@@ -61,8 +63,10 @@ class CourseSchema(marsh.SQLAlchemyAutoSchema):
     class Meta:
         model = Course
 
+
 course_schema = CourseSchema()
 courses_schema = CourseSchema(many=True)
+
 
 class Author(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -74,13 +78,24 @@ class Author(db.Model):
         self.author_id = author_id
         self.project_id = project_id
 
-        
+
+class AuthorSchema(marsh.Schema):
+    class Meta:
+        fields = ('id', 'author_id', 'project_id')
+
+
+author_schema = AuthorSchema()
+authors_schema = AuthorSchema(many=True)
+
+
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(200), nullable=True)
     subtitle = db.Column(db.String(500), nullable=True)
-    category = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=True)
-    knowledge_area = db.Column(db.Integer, db.ForeignKey('knowledge_area.id'), nullable=True)
+    category = db.Column(db.Integer, db.ForeignKey(
+        'category.id'), nullable=True)
+    knowledge_area = db.Column(db.Integer, db.ForeignKey(
+        'knowledge_area.id'), nullable=True)
     create_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     create_on = db.Column(db.DateTime, default=datetime.datetime.now())
     authors = db.relationship('Author', backref="project", lazy=True)
@@ -95,8 +110,9 @@ class Project(db.Model):
 
 class ProjectSchema(marsh.Schema):
     class Meta:
-       fields = ('id', 'title', 'subtitle', 'category', 'knowledge_area', 'create_by', 'create_on')
-    
+        fields = ('id', 'title', 'subtitle', 'category',
+                  'knowledge_area', 'create_by', 'create_on')
+
 
 project_schema = ProjectSchema()
 project_schemas = ProjectSchema(many=True)
@@ -109,13 +125,16 @@ class KnowledgeArea(db.Model):
     def __init__(self, name):
         self.name = name
 
+
 class KnowledgeAreaSchema(marsh.SQLAlchemyAutoSchema):
     class Meta():
         model = KnowledgeArea
 
+
 knowledgeArea_schema = KnowledgeAreaSchema()
 knowledgeAreas_schema = KnowledgeAreaSchema(many=True)
-        
+
+
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(50), nullable=False)
@@ -123,9 +142,11 @@ class Category(db.Model):
     def __init__(self, name):
         self.name = name
 
+
 class CategorySchema(marsh.SQLAlchemyAutoSchema):
     class Meta():
         model = Category
+
 
 category_schema = CategorySchema()
 categories_schema = CategorySchema(many=True)
@@ -143,16 +164,20 @@ class Submission(db.Model):
         self.filepath = filepath
         self.project_id = project_id
 
+
 class SubmissionSchema(marsh.SQLAlchemyAutoSchema):
     class Meta():
         model = Submission
 
+
 submission_schema = SubmissionSchema()
 submissions_schema = SubmissionSchema(many=True)
 
+
 class Revision(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    submission_id = db.Column(db.Integer, db.ForeignKey('submission.id'), nullable=False)
+    submission_id = db.Column(db.Integer, db.ForeignKey(
+        'submission.id'), nullable=False)
     create_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     comments = db.Column(db.String(1500), nullable=False)
     attachment_filepath = db.Column(db.String(1500), nullable=True)
@@ -163,10 +188,12 @@ class Revision(db.Model):
         self.comments = comments
         self.attachment_filepath = attachment_filepath
 
-class RevisionSchema(marsh.SQLAlchemyAutoSchema):
+
+class RevisionSchema(marsh.Schema):
     class Meta():
-        model = Revision
+        fields = ('id', 'submission_id', 'create_by',
+                  'comments', 'attachment_filepath')
+
 
 revision_schema = RevisionSchema()
 revisions_schema = RevisionSchema(many=True)
-    

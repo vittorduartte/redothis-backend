@@ -10,17 +10,20 @@ def init(app):
     def auth():
         return auth_user()
 
-    @bp.route('/user', methods=['POST'])
+    @bp.route('/user', methods=['GET', 'POST'])
     def register():
-        return register_user()
-
+        if request.method == 'POST':
+            return register_user()
+        else:
+            return get_user_by_id()
+            
     @bp.route('/users', methods=['GET'])
     def users_by_course():
         return get_students_by_course()
 
     @bp.route('/get_user', methods=['GET'])
     def get_user():
-        return get_user_by_id()
+        return get_user_by_id(request.args.get("id"))
     
     @bp.route('/user/<int:id_usuario>/projects', methods=['GET'])
     def get_projects_from_user(id_usuario):

@@ -1,6 +1,11 @@
 from flask import jsonify, request
 from ..extensions.database import database as db
-from ..models import Category, category_schema, categories_schema
+from ..models import (
+    Category,
+    category_schema,
+    categories_schema
+)
+
 
 def register_category():
     name = request.json['name']
@@ -19,6 +24,7 @@ def register_category():
                         'data': category_schema.dump(category)}), 201
     except:
         return jsonify({'message': 'error on transaction', 'data': False})
+
 
 def get_all_categories():
     try:
