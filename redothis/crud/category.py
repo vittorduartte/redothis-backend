@@ -30,7 +30,7 @@ def get_all_categories():
 
 
 def get_category_by_id():
-    category_id = request.json["category_id"]
+    category_id = request.args.get('id')
 
     category = Category.query.filter_by(id=category_id).first()
 

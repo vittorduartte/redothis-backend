@@ -5,12 +5,15 @@ def init(app):
 
     bp = Blueprint('courses', __name__)
 
-    @bp.route('/get_courses', methods=['GET'])
+    @bp.route('/course', methods=['GET', 'POST'])
+    def register():
+        if request.method == 'POST':
+            return register_course()
+        else:
+            return get_course_by_id()
+
+    @bp.route('/courses', methods=['GET'])
     def get_courses():
         return get_all_courses()
-
-    @bp.route('/get_course', methods=['GET'])
-    def get_course():
-        return get_course_by_id()
     
     app.register_blueprint(bp, url_prefix="/api/v1")

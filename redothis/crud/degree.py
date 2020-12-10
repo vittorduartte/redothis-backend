@@ -29,7 +29,7 @@ def get_all_degrees():
         return jsonify({'message': err, 'data': False})
 
 def get_degree_by_id():
-    degree_id = request.json["degree_id"]
+    degree_id = request.args.get("id")
 
     degree = Degree.query.filter_by(id=degree_id).first()
 

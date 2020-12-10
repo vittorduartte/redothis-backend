@@ -1,0 +1,86 @@
+{
+	"api_prefix": "http://127.0.0.1:5000/api/v1/",
+	"requests": [
+		{
+			"name": "category",
+			"type": "post",
+			"data": [
+				{
+					"name": "Monografia"
+				},
+				{
+					"name": "Tese"
+				},
+				{
+					"name": "Dissertação"
+				}
+			]
+		},
+		{
+			"name": "course",
+			"type": "post",
+			"data": [
+				{
+					"name": "Ciência da Computação - DCC"
+				},
+				{
+					"name": "Bacharelado Interdisciplinar em Ciência e Tecnologia - DBICT"
+				},
+				{
+					"name": "Engenharia da Computação - DECP"
+				}
+			]
+		},
+		{
+			"name": "degree",
+			"type": "post",
+			"data": [
+				{
+					"name": "Graduação"
+				},
+				{
+					"name": "Mestrado"
+				},
+				{
+					"name": "Doutorado"
+				},
+				{
+					"name": "Pós-Doutorado"
+				}
+			]
+		},
+		{
+			"name": "area",
+			"type": "post",
+			"data": [
+				{
+					"name": "Ciências Exatas e da Terra"
+				},
+				{
+					"name": "Ciências Biológicas"
+				},
+				{
+					"name": "Engenharia / Tecnologia"
+				},
+				{
+					"name": "Ciências da Saúde"
+				},
+				{
+					"name": "Ciências Agrárias"
+				},
+				{
+					"name": "Ciências Sociais"
+				},
+				{
+					"name": "Ciências Humanas"
+				},
+				{
+					"name": "Lingüística"
+				},
+				{
+					"name": "Letras e Artes"
+				}
+			]
+		}
+	]
+}

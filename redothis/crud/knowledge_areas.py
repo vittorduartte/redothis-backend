@@ -3,6 +3,23 @@ from ..extensions.database import database as db
 from ..models import KnowledgeArea, knowledgeArea_schema, knowledgeAreas_schema
 
 
+def register_knowledge_area():
+    name = request.json['name']
+
+    area = KnowledgeArea(name)
+    exists_area = KnowledgeArea.query.filter_by(name=name).first()
+
+    if exists_area:
+        return jsonify({'message': 'area already exists', 'data': False}), 500
+
+    try:
+        db.session.add(area)
+        db.session.commit()
+        return jsonify({'message': 'resource created',
+                        'data': knowledgeArea_schema.dump(area)}), 201
+    except Exception as err:
+        return jsonify({'message': err, 'data': False})
+
 def get_all_knowledge_areas():
     try:
         all_knowledge_areas = KnowledgeArea.query.order_by(KnowledgeArea.name).all()
@@ -11,7 +28,7 @@ def get_all_knowledge_areas():
         return jsonify({'message': 'Erro', 'data': False})
 
 def get_knowledge_area_by_id():
-    area_id = request.json['area_id']
+    area_id = request.args.get('id')
 
     area = KnowledgeArea.query.filter_by(id=area_id).first()
 

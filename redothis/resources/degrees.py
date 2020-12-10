@@ -6,12 +6,15 @@ def init(app):
 
     bp = Blueprint('degrees', __name__)
 
-    @bp.route('/get_degrees', methods=['GET'])
-    def get_degrees():
-        return get_all_degrees()
+    @bp.route('/degree', methods=['GET', 'POST'])
+    def register():
+        if request.method == 'POST':
+            return register_degree()
+        else:
+            return get_degree_by_id()
 
-    @bp.route('/get_degree', methods=['GET'])
+    @bp.route('/degrees', methods=['GET'])
     def get_degree():
-        return get_degree_by_id()
+        return get_all_degrees()
     
     app.register_blueprint(bp, url_prefix=os.environ.get('URL_PREFIX'))
