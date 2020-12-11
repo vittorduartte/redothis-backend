@@ -159,6 +159,7 @@ class Submission(db.Model):
     project_id = db.Column(db.Integer, db.ForeignKey(
         'project.id'), nullable=False)
     create_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    create_on = db.Column(db.DateTime, default=datetime.datetime.now())
 
     def __init__(self, description, filepath, project_id, create_by):
         self.description = description
@@ -169,7 +170,8 @@ class Submission(db.Model):
 
 class SubmissionSchema(marsh.Schema):
     class Meta():
-        fields = ('id', 'description', 'filepath', 'project_id', 'create_by')
+        fields = ('id', 'description', 'filepath',
+                  'project_id', 'create_by', 'create_on')
 
 
 submission_schema = SubmissionSchema()
@@ -183,6 +185,7 @@ class Revision(db.Model):
     create_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     comments = db.Column(db.String(1500), nullable=False)
     attachment_filepath = db.Column(db.String(1500), nullable=True)
+    create_on = db.Column(db.DateTime, default=datetime.datetime.now())
 
     def __init__(self, submission_id, create_by, comments, attachment_filepath):
         self.submission_id = submission_id
@@ -194,7 +197,7 @@ class Revision(db.Model):
 class RevisionSchema(marsh.Schema):
     class Meta():
         fields = ('id', 'submission_id', 'create_by',
-                  'comments', 'attachment_filepath')
+                  'comments', 'attachment_filepath', 'create_on')
 
 
 revision_schema = RevisionSchema()
