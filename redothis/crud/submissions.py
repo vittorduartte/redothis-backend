@@ -25,7 +25,7 @@ def register_submission():
         db.session.add(submission)
         db.session.commit()
         return jsonify({'message': 'resource created',
-                        'data:': submission_schema.dump(submission)}), 201
+                        'data': submission_schema.dump(submission)}), 201
     except:
         return jsonify({'message': 'error on transaction', 'data': False}), 200
 
