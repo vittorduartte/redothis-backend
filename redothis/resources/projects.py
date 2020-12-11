@@ -21,7 +21,7 @@ def init(app):
     def get_submissions_from_project(id_project):
         return get_project_submissions(id_project)
 
-    @bp.route('/project<int:id_project>/revisions', methods=['GET'])
+    @bp.route('/project/<int:id_project>/revisions', methods=['GET'])
     def get_revisions_from_project(id_project):
         pass
 

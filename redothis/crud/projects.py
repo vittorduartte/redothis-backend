@@ -43,8 +43,11 @@ def register_project():
         db.session.add(Author(create_by, project.id))
         for s in students:
             db.session.add(Author(s, project.id))
-        for t in tutors:
-            db.session.add(Author(t, project.id))
+        if(len(tutors) == 0):
+            pass
+        else:
+            for t in tutors:
+                db.session.add(Author(t, project.id))
 
         db.session.commit()
         return jsonify({'message': 'resource created', 'data': project_schema.dump(project)}), 201
