@@ -6,7 +6,9 @@ from ..models import (
     submissions_schema,
     Revision,
     revision_schema,
-    revisions_schema
+    revisions_schema,
+    User,
+    user_schema
 )
 from .revisions import get_user_from_revision
 
@@ -15,8 +17,9 @@ def register_submission():
     description = request.json['description']
     filepath = request.json['filepath']
     project_id = request.json['project_id']
+    create_by = request.json['user_id']
 
-    submission = Submission(description, filepath, project_id)
+    submission = Submission(description, filepath, project_id, create_by)
 
     try:
         db.session.add(submission)
@@ -36,6 +39,9 @@ def get_submission_by_id():
     if submission:
         submission = submission_schema.dump(submission)
 
+        submission['create_by'] = get_user_from_revision(
+            submission['create_by'])
+
         revisions = Revision.query.filter(
             Revision.submission_id == submission['id']).all()
 
@@ -46,8 +52,15 @@ def get_submission_by_id():
 
         submission['revisions'] = revisions
 
+        if len(submission['revisions']) > 0:
+            submission['revised'] = 1
+        else:
+            submission['revised'] = 0
+
         return jsonify({'message': 'success',
                         'data': submission}), 200
+    else:
+        return jsonify({'message': '_no_valid_submission_id_', 'data': False}), 200
 
 
 def get_project_submissions(project_id):
@@ -57,6 +70,9 @@ def get_project_submissions(project_id):
         project_submissions = submissions_schema.dump(project_submissions)
 
         for p in project_submissions:
+            p['create_by'] = get_user_from_revision(
+                p['create_by'])
+
             revisions = Revision.query.filter(
                 Revision.submission_id == p['id']).all()
 
@@ -66,6 +82,11 @@ def get_project_submissions(project_id):
                 r['create_by'] = get_user_from_revision(r['create_by'])
 
             p['revisions'] = revisions
+
+            if len(p['revisions']) > 0:
+                p['revised'] = 1
+            else:
+                p['revised'] = 0
 
         return jsonify({'message': 'success',
                         'data': project_submissions}), 200

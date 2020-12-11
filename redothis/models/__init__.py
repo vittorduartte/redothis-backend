@@ -158,16 +158,18 @@ class Submission(db.Model):
     filepath = db.Column(db.String(200), nullable=False)
     project_id = db.Column(db.Integer, db.ForeignKey(
         'project.id'), nullable=False)
+    create_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-    def __init__(self, description, filepath, project_id):
+    def __init__(self, description, filepath, project_id, create_by):
         self.description = description
         self.filepath = filepath
         self.project_id = project_id
+        self.create_by = create_by
 
 
-class SubmissionSchema(marsh.SQLAlchemyAutoSchema):
+class SubmissionSchema(marsh.Schema):
     class Meta():
-        model = Submission
+        fields = ('id', 'description', 'filepath', 'project_id', 'create_by')
 
 
 submission_schema = SubmissionSchema()
