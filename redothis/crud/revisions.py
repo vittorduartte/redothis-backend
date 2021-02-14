@@ -5,11 +5,11 @@ from ..models import (
     revision_schema,
     revisions_schema,
     User,
-    user_schema,
-    Degree,
-    Course
+    user_schema
 )
 
+from ..models.course import Course
+from ..models.degree import Degree
 
 def register_revision():
     submission_id = request.json['submission_id']

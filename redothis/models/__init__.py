@@ -34,38 +34,38 @@ user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 
 
-class Degree(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(20), nullable=False)
+# class Degree(db.Model):
+#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+#     name = db.Column(db.String(20), nullable=False)
 
-    def __init__(self, name):
-        self.name = name
-
-
-class DegreeSchema(marsh.SQLAlchemyAutoSchema):
-    class Meta:
-        model = Degree
+#     def __init__(self, name):
+#         self.name = name
 
 
-degree_schema = DegreeSchema()
-degrees_schema = DegreeSchema(many=True)
+# class DegreeSchema(marsh.SQLAlchemyAutoSchema):
+#     class Meta:
+#         model = Degree
 
 
-class Course(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(50), nullable=False)
-
-    def __init__(self, name):
-        self.name = name
+# degree_schema = DegreeSchema()
+# degrees_schema = DegreeSchema(many=True)
 
 
-class CourseSchema(marsh.SQLAlchemyAutoSchema):
-    class Meta:
-        model = Course
+# class Course(db.Model):
+#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+#     name = db.Column(db.String(50), nullable=False)
+
+#     def __init__(self, name):
+#         self.name = name
 
 
-course_schema = CourseSchema()
-courses_schema = CourseSchema(many=True)
+# class CourseSchema(marsh.SQLAlchemyAutoSchema):
+#     class Meta:
+#         model = Course
+
+
+# course_schema = CourseSchema()
+# courses_schema = CourseSchema(many=True)
 
 
 class Author(db.Model):

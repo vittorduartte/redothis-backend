@@ -5,9 +5,9 @@ from ..models import (
     User,
     user_schema,
     users_schema,
-    Degree,
-    Course
 )
+from ..models.course import Course
+from ..models.degree import Degree
 
 
 def register_user():

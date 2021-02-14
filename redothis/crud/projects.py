@@ -10,17 +10,20 @@ from ..models import (
     Author,
     authors_schema,
     Category,
-    Course,
-    course_schema,
-    Degree,
     Submission,
     submission_schema,
     submissions_schema,
     KnowledgeArea
 )
 
-from .users import get_user_by_id
+from ..models.course import (
+    Course,
+    course_schema
+)
 
+from ..models.degree import Degree
+
+from .users import get_user_by_id
 
 def register_project():
     title = request.json['title']

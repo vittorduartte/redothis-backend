@@ -1,11 +1,10 @@
 from flask import jsonify, request
 from ..extensions.database import database as db
-from ..models import (
+from ..models.degree import (
     Degree,
     degree_schema,
     degrees_schema
 )
-
 
 def register_degree():
     name = request.json['name']
