@@ -3,7 +3,7 @@
  [🇧🇷] O Redothis é uma plataforma de gerenciamento de projetos acadêmicos. Inicialmente projetado para trabalhos de propósitos gerais. Para mais, leia o README. [🇺🇸] The Redothis this a platform for management academic project of general purposes. For more read the README.
 
 <p align="center">
-<img src="https://i.ibb.co/cksr7Sb/web-preview.png" alt="Mateus Vitor Duarte" border="0">
+<!-- <img src="https://i.ibb.co/cksr7Sb/web-preview.png" alt="Mateus Vitor Duarte" border="0"> -->
 </p>
 
 <p align="center">
@@ -32,7 +32,10 @@
 OS X & Linux:
 
 ```sh
-npm install my-crazy-module --save
+git clone https://github.com/vittorduartte/redothis-backend
+cd redothis-backend
+pipenv shell
+flask run
 ```
 
 Windows:
@@ -60,7 +63,7 @@ npm test
 
 ## 🗃 Histórico de lançamentos
 
-* 0.0.1
+<!-- * 0.0.1
     * MUDANÇA: Atualização de docs (código do módulo permanece inalterado)
 * 0.2.0
     * MUDANÇA: Remove `setDefaultXYZ()`
@@ -69,9 +72,11 @@ npm test
     * CONSERTADO: Crash quando chama `baz()` (Obrigado @NomeDoContribuidorGeneroso!)
 * 0.1.0
     * O primeiro lançamento adequado
-    * MUDANÇA: Renomeia `foo()` para `bar()`
+    * MUDANÇA: Renomeia `foo()` para `bar()` -->
 * 0.0.1
-    * Trabalho em andamento
+    * Modelo de banco de dados gerado incialmente:
+         
+         <img src="https://raw.githubusercontent.com/vittorduartte/redothis-backend/main/assets/database_diagram.png" width="500" height="300">
 
 ## 📋 Meta
 
