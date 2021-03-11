@@ -3,11 +3,12 @@ from ..extensions.database import database as db
 from ..models import (
     Revision,
     revision_schema,
-    revisions_schema,
+    revisions_schema
+)
+from ..models.user import (
     User,
     user_schema
 )
-
 from ..models.course import Course
 from ..models.degree import Degree
 

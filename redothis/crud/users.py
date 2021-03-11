@@ -1,10 +1,10 @@
 from flask import request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from ..extensions.database import database as db
-from ..models import (
+from ..models.user import (
     User,
     user_schema,
-    users_schema,
+    users_schema
 )
 from ..models.course import Course
 from ..models.degree import Degree

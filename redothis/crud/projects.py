@@ -1,29 +1,33 @@
 from flask import request, jsonify
 from ..extensions.database import database as db
 from ..models import (
-    Project,
-    project_schema,
-    project_schemas,
-    User,
-    user_schema,
-    users_schema,
-    Author,
-    authors_schema,
     Category,
     Submission,
     submission_schema,
     submissions_schema,
     KnowledgeArea
 )
-
+from ..models.user import (
+    User,
+    user_schema,
+    users_schema
+)
+from ..models.user import (
+    Author,
+    authors_schema
+)
 from ..models.course import (
     Course,
     course_schema
 )
-
 from ..models.degree import Degree
-
+from ..models.project import (
+    Project,
+    project_schema,
+    project_schemas
+)
 from .users import get_user_by_id
+
 
 def register_project():
     title = request.json['title']

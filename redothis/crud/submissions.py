@@ -6,7 +6,9 @@ from ..models import (
     submissions_schema,
     Revision,
     revision_schema,
-    revisions_schema,
+    revisions_schema
+)
+from ..models.user import (
     User,
     user_schema
 )
