@@ -1,12 +1,8 @@
-# Execução:
-# python populate_database.py populate_data.json
-
 import json
 import requests
-import sys
+import sys, os
 
 session = None
-
 
 def read_json(filepath):
     with open(filepath, 'r') as f:
@@ -41,6 +37,8 @@ def main(args):
         else:
             continue
 
-
-if __name__ == '__main__':
-    main(sys.argv)
+def init():
+        if 'main' == __name__:
+            main(sys.argv)
+        else:
+            main(['', f"{os.getcwd()}/redothis/misc/populate_data.json"])
