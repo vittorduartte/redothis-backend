@@ -1,6 +1,6 @@
 from flask import Flask
 from .resources import users, courses, degrees, projects, categories, submissions, revisions, knowledge_areas
-from .extensions import database, cors
+from .extensions import database, cors, cli
 
 def create_app():
     app = Flask(__name__)
@@ -10,6 +10,7 @@ def create_app():
 #   Iniciando as extensões
     database.init(app)
     cors.init(app)
+    cli.init(app)
     
 #   Iniciando as rotas
     users.init(app)
