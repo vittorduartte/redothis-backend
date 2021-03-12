@@ -12,7 +12,7 @@ from ..models.user import (
     user_schema,
     users_schema
 )
-from ..models.user import (
+from ..models.author import (
     Author,
     authors_schema
 )
