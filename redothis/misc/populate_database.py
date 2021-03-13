@@ -1,8 +1,10 @@
 import json
 import requests
-import sys, os
+import sys
+import os
 
 session = None
+
 
 def read_json(filepath):
     with open(filepath, 'r') as f:
@@ -37,8 +39,10 @@ def main(args):
         else:
             continue
 
+
 def init():
-        if 'main' == __name__:
-            main(sys.argv)
-        else:
-            main(['', f"{os.getcwd()}/redothis/misc/populate_data.json"])
+    main(['', f"{os.getcwd()}/redothis/misc/populate_data.json"])
+
+
+if 'main' == __name__:
+    main(sys.argv)
