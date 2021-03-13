@@ -1,4 +1,4 @@
-# 📜 Redothis - Gerenciando e documentação a criação acadêmica 
+# 📜 Redothis - Gerenciando e documentando a criação acadêmica 
 
  [🇧🇷] O Redothis é uma plataforma de gerenciamento de projetos acadêmicos. Inicialmente projetado para trabalhos de propósitos gerais. Para mais, leia o README. [🇺🇸] The Redothis this a platform for management academic project of general purposes. For more read the README.
 
@@ -25,7 +25,12 @@
   </a>
 </p>
 
-💡 De um a dois parágrafos sobre o que é seu projeto e o que ele faz.
+💡[🇧🇷] O Redothis é uma maneira de professores e alunos organizarem o desenvolvimento de projetos acadêmicos documentando todas as etapas e gerenciando as versões e artefatos geradas em cada parte desse processo.
+Inicialmente desenvolvido para trabalhos acadêmicos de propósitos gerais, a plataforma está atualmente
+ajustada para receber projetos de Trabalho de Conclusão de Curso - TCC que é o formato usualmente utilizado
+pelas instituições.
+
+💡[🇺🇸] Is coming.
 
 ## 🛠 Instalação
 
@@ -74,21 +79,21 @@ npm test
     * O primeiro lançamento adequado
     * MUDANÇA: Renomeia `foo()` para `bar()` -->
 * 0.0.1
-    * Modelo de banco de dados gerado incialmente:
+    * Representação do diagrama relacional do banco de dados:
          
-         <img src="https://raw.githubusercontent.com/vittorduartte/redothis-backend/main/assets/database_diagram.png" width="500" height="300">
+         <img src="https://raw.githubusercontent.com/vittorduartte/redothis-backend/main/assets/database_diagram.png">
 
 ## 📋 Meta
 
-Seu Nome – [Portfólio](https://www...) – SeuEmail@exemplo.com
+Mateus Vitor – [Portfólio](https://vittorduartte.github.io/) – mateusriograndense@gmail.com
 
-Distribuído sob a licença XYZ. Veja `LICENSE` para mais informações.
+<!-- Distribuído sob a licença XYZ. Veja `LICENSE` para mais informações. -->
 
-[https://github.com/seuUsuario/nomeDoRepositorio](https://github.com/devgabrieldejesus/)
+[https://github.com/vittorduartte/redothis-backend](https://github.com/vittorduartte/redothis-backend)
 
 ## 🚀 Contribuição
 
-1. Faça o _fork_ do projeto (<https://github.com/seuUsuario/nomeDoRepositorio/fork>)
+1. Faça o _fork_ do projeto (<https://github.com/vittorduartte/redothis-backend/fork>)
 2. Crie uma _branch_ para sua modificação (`git checkout -b meu-novo-recurso`)
 3. Faça o _commit_ (`git commit -am 'Adicionando um novo recurso...'`)
 4. _Push_ (`git push origin meu-novo-recurso`)
