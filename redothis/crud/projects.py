@@ -1,9 +1,14 @@
 from flask import request, jsonify
 from ..extensions.database import database as db
-from ..models import (
+
+from ..models.category import (
     Category,
+)
+
+from ..models.knowledgearea import (
     KnowledgeArea
 )
+
 from ..models.user import (
     User,
     user_schema,
