@@ -1,6 +1,6 @@
 from flask import jsonify, request
 from ..extensions.database import database as db
-from ..models import (
+from ..models.category import (
     Category,
     category_schema,
     categories_schema

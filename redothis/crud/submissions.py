@@ -1,9 +1,6 @@
 from flask import request, jsonify
 from ..extensions.database import database as db
-from ..models import (
-    Submission,
-    submission_schema,
-    submissions_schema,
+from ..models.revision import (
     Revision,
     revision_schema,
     revisions_schema
@@ -11,6 +8,11 @@ from ..models import (
 from ..models.user import (
     User,
     user_schema
+)
+from ..models.submission import (
+    Submission,
+    submission_schema,
+    submissions_schema
 )
 from .revisions import get_user_from_revision
 

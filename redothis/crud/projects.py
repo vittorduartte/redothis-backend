@@ -2,9 +2,6 @@ from flask import request, jsonify
 from ..extensions.database import database as db
 from ..models import (
     Category,
-    Submission,
-    submission_schema,
-    submissions_schema,
     KnowledgeArea
 )
 from ..models.user import (
@@ -25,6 +22,11 @@ from ..models.project import (
     Project,
     project_schema,
     project_schemas
+)
+from ..models.submission import (
+    Submission,
+    submission_schema,
+    submissions_schema
 )
 from .users import get_user_by_id
 
