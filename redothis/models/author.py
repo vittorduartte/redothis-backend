@@ -1,6 +1,7 @@
 from ..extensions.database import database as db
 from ..extensions.marshmallow import marsh
 
+
 class Author(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)

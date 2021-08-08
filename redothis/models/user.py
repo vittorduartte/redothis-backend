@@ -2,6 +2,7 @@ import datetime
 from ..extensions.database import database as db
 from ..extensions.marshmallow import marsh
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     email = db.Column(db.String(50), unique=True, nullable=False)

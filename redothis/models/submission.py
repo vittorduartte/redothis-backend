@@ -2,6 +2,7 @@ import datetime
 from ..extensions.database import database as db
 from ..extensions.marshmallow import marsh
 
+
 class Submission(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     description = db.Column(db.String(500), nullable=False)
