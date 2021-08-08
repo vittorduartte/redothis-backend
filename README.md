@@ -3,7 +3,7 @@
  [🇧🇷] O Redothis é uma plataforma de gerenciamento de projetos acadêmicos. Inicialmente projetado para trabalhos de propósitos gerais. Para mais, leia o README. [🇺🇸] The Redothis this a platform for management academic project of general purposes. For more read the README.
 
 <p align="center">
-<!-- <img src="https://i.ibb.co/cksr7Sb/web-preview.png" alt="Mateus Vitor Duarte" border="0"> -->
+<img src="https://raw.githubusercontent.com/vittorduartte/redothis-backend/main/assets/redothis_frontend" alt="Mateus Vitor Duarte" border="0">
 </p>
 
 <p align="center">
@@ -32,21 +32,40 @@ pelas instituições.
 
 💡[🇺🇸] Is coming.
 
-## 🛠 Instalação
+## 💻 Configuração para Desenvolvimento
 
-OS X & Linux:
+O projeto requer a utilização das versões 3 do Python, bem como o gerenciador de ambientes **Pipenv**.
 
+1. Instalação **Pipenv**:
 ```sh
-git clone https://github.com/vittorduartte/redothis-backend
-cd redothis-backend
-pipenv shell
-flask run
+pip install pipenv
 ```
 
-Windows:
-
+2. Clone do repositório do projeto:
 ```sh
-edit autoexec.bat
+git clone https://github.com/vittorduartte/redothis-backend
+```
+
+3. Criação do arquivo **.env** de variáveis de ambiente:
+```sh
+cd redothis-backend
+touch .env
+```
+
+4. Conteúdo do arquivo **.env**:
+```environment
+FLASK_APP=redothis/app.py
+FLASK_ENV=development
+SECRET_KEY="<escolha_uma_chave_secreta>"
+SQLALCHEMY_DATABASE_URI="sqlite:///database.db"
+JWT_REQUIRED_CLAIMS="['exp']"
+```
+
+5. Ativação do ambiente e execução do servidor:
+```sh
+pipenv install
+pipenv shell
+flask run
 ```
 
 ## 📈 Exemplo de uso
@@ -57,14 +76,9 @@ Adicione blocos de códigos e, se necessário, screenshots.
 
 _Para mais exemplos, consulte a [Wiki](wiki)._ 
 
-## 💻 Configuração para Desenvolvimento
+## 🚀 Deployment
 
-Descreva como instalar todas as dependências para desenvolvimento e como rodar um test-suite automatizado de algum tipo. Se necessário, faça isso para múltiplas plataformas.
-
-```sh
-make install
-npm test
-```
+Instruções para deploy do projeto.
 
 ## 🗃 Histórico de lançamentos
 
