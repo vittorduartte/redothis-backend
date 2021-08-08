@@ -1,39 +1,22 @@
-from flask import request, jsonify
+from flask import request
+from flask import jsonify
 from ..extensions.database import database as db
-
-from ..models.category import (
-    Category,
-)
-
-from ..models.knowledgearea import (
-    KnowledgeArea
-)
-
-from ..models.user import (
-    User,
-    user_schema,
-    users_schema
-)
-from ..models.author import (
-    Author,
-    authors_schema
-)
-from ..models.course import (
-    Course,
-    course_schema
-)
+from ..models.category import Category
+from ..models.knowledgearea import KnowledgeArea
+from ..models.user import User
+from ..models.user import user_schema
+from ..models.user import users_schema
+from ..models.author import Author
+from ..models.author import authors_schema
+from ..models.course import Course
+from ..models.course import course_schema
 from ..models.degree import Degree
-from ..models.project import (
-    Project,
-    project_schema,
-    project_schemas
-)
-from ..models.submission import (
-    Submission,
-    submission_schema,
-    submissions_schema
-)
-from .users import get_user_by_id
+from ..models.project import Project
+from ..models.project import project_schema
+from ..models.project import project_schemas
+from ..models.submission import Submission
+from ..models.submission import submission_schema
+from ..models.submission import submissions_schema
 
 
 def register_project():
