@@ -1,6 +1,6 @@
 @baseURL=http://localhost:5000/api/v1
-@username=student@example.com
-@password=mypass
+@username=thiagocutrim@discente.ufma.br
+@password=123456
 
 ### POST - Autenticação de usuário ###
 POST {{baseURL}}/oauth  HTTP/1.1
