@@ -27,7 +27,6 @@ def create_app():
     cors.init(app)
     cli.init(app)
     jwt.init(app)
-#   migrate.init(app)
 
 #   Iniciando as rotas
     users.init(app)
