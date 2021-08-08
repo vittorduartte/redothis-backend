@@ -91,7 +91,8 @@ def auth_user():
         }), 500
 
 
-def get_user_by_email(email):
+def get_user_by_email():
+    email = request.json['email']
     user = User.query.join(Degree, User.degree_id == Degree.id).join(
         Course, User.course_id == Course.id).add_columns(Degree.name, Course.name).filter(User.email == email).first()
 
