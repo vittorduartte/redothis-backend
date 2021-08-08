@@ -3,7 +3,7 @@
  [🇧🇷] O Redothis é uma plataforma de gerenciamento de projetos acadêmicos. Inicialmente projetado para trabalhos de propósitos gerais. Para mais, leia o README. [🇺🇸] The Redothis this a platform for management academic project of general purposes. For more read the README.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/vittorduartte/redothis-backend/main/assets/redothis_frontend" alt="Mateus Vitor Duarte" border="0">
+<img src="https://raw.githubusercontent.com/vittorduartte/redothis-backend/main/assets/redothis_frontend.png" alt="Screenshot Redothis" border="0">
 </p>
 
 <p align="center">
