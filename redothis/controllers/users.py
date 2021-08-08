@@ -92,7 +92,7 @@ def auth_user():
 
 
 def get_user_by_email():
-    email = request.json['email']
+    email = request.args.get('email')
     user = User.query.join(Degree, User.degree_id == Degree.id).join(
         Course, User.course_id == Course.id).add_columns(Degree.name, Course.name).filter(User.email == email).first()
 
@@ -104,4 +104,4 @@ def get_user_by_email():
 
         return jsonify({'message': 'success', 'data': dumped_data}), 201
     else:
-        return jsonify({'message': 'invalid_user_id__', 'data': False}), 200
+        return jsonify({'message': 'invalid_user_email', 'data': False}), 200
