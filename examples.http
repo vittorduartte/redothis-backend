@@ -1,0 +1,76 @@
+@baseURL=http://localhost:5000/api/v1
+@username=student@example.com
+@password=mypass
+
+### POST - Autenticação de usuário ###
+POST {{baseURL}}/oauth  HTTP/1.1
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded;charset=utf-8
+Authorization: Basic {{username}} {{password}}
+
+### GET - Categorias ###
+GET {{baseURL}}/categories HTTP/1.1
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0dWRlbnRAZXhhbXBsZS5jb20iLCJleHAiOjE2Mjg0NzQzNzB9.W7qFQm8SLhSyo0tx2-5v6YIiKkLUnsjjGpYr8cnT4ig
+
+### GET - Cursos ###
+GET {{baseURL}}/courses HTTP/1.1
+
+### POST - Curso ###
+POST {{baseURL}}/course HTTP/1.1
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0dWRlbnRAZXhhbXBsZS5jb20iLCJleHAiOjE2Mjg0NzQzNzB9.W7qFQm8SLhSyo0tx2-5v6YIiKkLUnsjjGpYr8cnT4ig
+
+### GET - Alunos de um curso ###
+GET {{baseURL}}/course/1/users HTTP/1.1
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0dWRlbnRAZXhhbXBsZS5jb20iLCJleHAiOjE2Mjg0NzQzNzB9.W7qFQm8SLhSyo0tx2-5v6YIiKkLUnsjjGpYr8cnT4ig
+
+### GET - Grau de instrução ###
+GET {{baseURL}}/degrees HTTP/1.1
+
+### POST - Grau de instrução ###
+POST {{baseURL}}/degree HTTP/1.1
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0dWRlbnRAZXhhbXBsZS5jb20iLCJleHAiOjE2Mjg0NzQzNzB9.W7qFQm8SLhSyo0tx2-5v6YIiKkLUnsjjGpYr8cnT4ig
+
+### GET - Áreas de conhecimentos ###
+GET {{baseURL}}/areas HTTP/1.1
+
+### GET - Grau de instrução ###
+GET {{baseURL}}/degrees HTTP/1.1
+
+### POST - Grau de instrução ###
+POST {{baseURL}}/degrees HTTP/1.1
+Accept: text/html
+Content-Type: application/json
+
+{
+	"name": "Graduação"
+}
+
+### POST - Aluno ###
+POST {{baseURL}}/user
+Accept: text/html
+Content-Type: application/json
+
+{
+    "email":"student@example.com",
+    "password":"mypass",
+    "name":"Student",
+    "type_user":0,
+    "university":"{'text':'Universidade Federal do Maranhão', 'value':'1'}",
+    "degree":"{'text':'Graduação', 'value':'1'}",
+    "course":"{'text':'Engenharia da Computação', 'value':'1'}"
+}
+
+### POST - Orientador ###
+POST {{baseURL}}/user
+Accept: text/html
+Content-Type: application/json
+
+{
+    "email":"teacher@example.com",
+    "password":"mypass",
+    "name":"Teacher",
+    "type_user":1,
+    "university":"{'text':'Universidade Federal do Maranhão', 'value':'1'}",
+    "degree":"{'text':'Doutorado', 'value':'3'}",
+    "course":"{'text':'Engenharia da Computação', 'value':'1'}"
+}
