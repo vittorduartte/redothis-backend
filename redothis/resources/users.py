@@ -4,7 +4,7 @@ from flask import Blueprint
 from ..controllers.users import get_students_by_course
 from ..controllers.users import get_user_by_email
 from ..controllers.users import register_user
-from ..controllers.users import auth_user
+from ..controllers.auth import auth_user
 from ..controllers.projects import get_projects_by_user
 from flask_jwt import jwt_required
 
@@ -12,10 +12,6 @@ from flask_jwt import jwt_required
 def init(app):
 
     bp = Blueprint('users', __name__)
-
-    @bp.route('/oauth', methods=['POST'])
-    def login():
-        return auth_user()
 
     @bp.route('/user', methods=['GET', 'POST'])
     def register():
