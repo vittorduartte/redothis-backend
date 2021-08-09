@@ -1,6 +1,6 @@
 from flask_jwt import JWT
-from ..controllers.users import indentity
-from ..controllers.users import authenticate
+from ..controllers.auth import indentity
+from ..controllers.auth import authenticate
 
 
 def init(app):
