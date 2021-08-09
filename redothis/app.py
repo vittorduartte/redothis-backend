@@ -7,6 +7,7 @@ from .resources import categories
 from .resources import submissions
 from .resources import revisions
 from .resources import knowledge_areas
+from .resources import auth
 from .extensions import database
 from .extensions import cors
 from .extensions import cli
@@ -37,5 +38,6 @@ def create_app():
     submissions.init(app)
     revisions.init(app)
     knowledge_areas.init(app)
+    auth.init(app)
 
     return app
