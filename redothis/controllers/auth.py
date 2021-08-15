@@ -21,8 +21,7 @@ def indentity(payload):
     return user_schema.dump(User.query.add_columns(User.email, User.name, User.degree_id, User.course_id, User.type_user).filter_by(email=email).first())
 
 
-def auth_user():
-    auth = request.authorization
+def auth_user(auth):
 
     if not auth or not auth.username or not auth.password:
         return jsonify({"message": "Could not verify", "WWW-Authenticate": "Basic auth='Login required'"}), 401

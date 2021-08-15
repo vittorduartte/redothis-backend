@@ -1,14 +1,11 @@
 from flask import jsonify, request
 from ..extensions.database import database as db
-from ..models.category import (
-    Category,
-    category_schema,
-    categories_schema
-)
+from ..models.category import Category
+from ..models.category import category_schema
+from ..models.category import categories_schema
 
 
-def register_category():
-    name = request.json['name']
+def register_category(name):
 
     category = Category(name)
 
@@ -35,8 +32,7 @@ def get_all_categories():
         return jsonify({'message': 'error on transaction', 'data': False})
 
 
-def get_category_by_id():
-    category_id = request.args.get('id')
+def get_category_by_id(category_id):
 
     category = Category.query.filter_by(id=category_id).first()
 

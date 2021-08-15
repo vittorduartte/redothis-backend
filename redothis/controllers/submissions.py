@@ -1,28 +1,17 @@
 from flask import request, jsonify
 from ..extensions.database import database as db
-from ..models.revision import (
-    Revision,
-    revision_schema,
-    revisions_schema
-)
-from ..models.user import (
-    User,
-    user_schema
-)
-from ..models.submission import (
-    Submission,
-    submission_schema,
-    submissions_schema
-)
+from ..models.revision import Revision
+from ..models.revision import revision_schema
+from ..models.revision import revisions_schema
+from ..models.user import User
+from ..models.user import user_schema
+from ..models.submission import Submission
+from ..models.submission import submission_schema
+from ..models.submission import submissions_schema
 from .revisions import get_user_from_revision
 
 
-def register_submission():
-    description = request.json['description']
-    filepath = request.json['filepath']
-    project_id = request.json['project_id']
-    create_by = request.json['user_id']
-
+def register_submission(description, filepath, project_id, create_by):
     submission = Submission(description, filepath, project_id, create_by)
 
     try:
@@ -34,9 +23,7 @@ def register_submission():
         return jsonify({'message': 'error on transaction', 'data': False}), 200
 
 
-def get_submission_by_id():
-    submission_id = request.args.get('id')
-
+def get_submission_by_id(submission_id):
     submission = Submission.query.filter(
         Submission.id == submission_id).first()
 

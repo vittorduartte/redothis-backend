@@ -14,9 +14,11 @@ def init(app):
     @jwt_required()
     def register():
         if request.method == 'POST':
-            return register_category()
+            name = request.json['name']
+            return register_category(name)
         else:
-            return get_category_by_id()
+            category_id = request.args.get('id')
+            return get_category_by_id(category_id)
 
     @bp.route('/categories', methods=['GET'])
     @jwt_required()

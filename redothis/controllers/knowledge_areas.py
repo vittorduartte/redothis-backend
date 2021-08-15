@@ -1,14 +1,11 @@
 from flask import request, jsonify
 from ..extensions.database import database as db
-from ..models.knowledgearea import (
-    KnowledgeArea,
-    knowledgeArea_schema,
-    knowledgeAreas_schema
-)
+from ..models.knowledgearea import KnowledgeArea
+from ..models.knowledgearea import knowledgeArea_schema
+from ..models.knowledgearea import knowledgeAreas_schema
 
 
-def register_knowledge_area():
-    name = request.json['name']
+def register_knowledge_area(name):
 
     area = KnowledgeArea(name)
     exists_area = KnowledgeArea.query.filter_by(name=name).first()
@@ -34,8 +31,7 @@ def get_all_knowledge_areas():
         return jsonify({'message': '_error_in_getting_areas_', 'data': False})
 
 
-def get_knowledge_area_by_id():
-    area_id = request.args.get('id')
+def get_knowledge_area_by_id(area_id):
 
     area = KnowledgeArea.query.filter_by(id=area_id).first()
 

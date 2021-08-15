@@ -14,8 +14,13 @@ def init(app):
     @jwt_required()
     def register():
         if request.method == 'POST':
-            return register_revision()
+            submission_id = request.json['submission_id']
+            create_by = request.json['user_id']
+            comments = request.json['comments']
+            attachment_filepath = request.json['attachment_filepath']
+            return register_revision(submission_id, create_by, comments, attachment_filepath)
         else:
-            return get_revision_by_id()
+            revision_id = request.args.get('id')
+            return get_revision_by_id(revision_id)
 
     app.register_blueprint(bp, url_prefix="/api/v1")

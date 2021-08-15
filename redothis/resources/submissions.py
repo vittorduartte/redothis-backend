@@ -15,9 +15,14 @@ def init(app):
     @jwt_required()
     def register():
         if request.method == 'POST':
-            return register_submission()
+            description = request.json['description']
+            filepath = request.json['filepath']
+            project_id = request.json['project_id']
+            create_by = request.json['user_id']
+            return register_submission(description, filepath, project_id, create_by)
         else:
-            return get_submission_by_id()
+            submission_id = request.args.get('id')
+            return get_submission_by_id(submission_id)
 
     @bp.route('/submission/<int:id_submission>/revisions', methods=['GET'])
     @jwt_required()

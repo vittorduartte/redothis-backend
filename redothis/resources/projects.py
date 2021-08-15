@@ -16,9 +16,17 @@ def init(app):
     @jwt_required()
     def register():
         if request.method == 'POST':
-            return register_project()
+            title = request.json['title']
+            subtitle = request.json['subtitle']
+            category = request.json['category']
+            knowledge_area = request.json['knowledge_area']
+            students = request.json['students']
+            tutors = request.json['tutors']
+            create_by = request.json['create_by']
+            return register_project(title, subtitle, category, knowledge_area, students, tutors, create_by)
         else:
-            return get_project_by_id()
+            project_id = request.args.get('id')
+            return get_project_by_id(project_id)
 
     @bp.route('/project/<int:id_project>/users', methods=['GET'])
     @jwt_required()

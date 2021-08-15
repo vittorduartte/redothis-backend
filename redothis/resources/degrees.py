@@ -15,9 +15,11 @@ def init(app):
     @jwt_required()
     def register():
         if request.method == 'POST':
-            return register_degree()
+            name = request.json['name']
+            return register_degree(name)
         else:
-            return get_degree_by_id()
+            degree_id = request.args.get("id")
+            return get_degree_by_id(degree_id)
 
     @bp.route('/degrees', methods=['GET'])
     def get_degree():

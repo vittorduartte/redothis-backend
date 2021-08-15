@@ -13,13 +13,7 @@ from ..models.course import Course
 from ..models.degree import Degree
 
 
-def register_user():
-    email = request.json['email']
-    password = request.json['password']
-    name = request.json['name']
-    type_user = request.json['type_user']
-    degree = request.json['degree']
-    course = request.json['course']
+def register_user(email, password, name, type_user, degree, course):
     password_hash = generate_password_hash(password)
 
     user = User(email,
@@ -55,8 +49,7 @@ def get_students_by_course(id_course):
         return jsonify({'message': 'users_not_exists', 'data': False}), 500
 
 
-def get_user_by_email():
-    email = request.args.get('email')
+def get_user_by_email(email):
     user = User.query.join(Degree, User.degree_id == Degree.id).join(
         Course, User.course_id == Course.id).add_columns(Degree.name, Course.name).filter(User.email == email).first()
 

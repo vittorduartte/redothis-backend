@@ -14,9 +14,11 @@ def init(app):
     @jwt_required()
     def get_areas():
         if request.method == 'POST':
-            return register_knowledge_area()
+            name = request.json['name']
+            return register_knowledge_area(name)
         else:
-            return get_knowledge_area_by_id()
+            area_id = request.args.get('id')
+            return get_knowledge_area_by_id(area_id)
 
     @bp.route('/areas', methods=['GET'])
     def get_area():

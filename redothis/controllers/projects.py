@@ -19,14 +19,7 @@ from ..models.submission import submission_schema
 from ..models.submission import submissions_schema
 
 
-def register_project():
-    title = request.json['title']
-    subtitle = request.json['subtitle']
-    category = request.json['category']
-    knowledge_area = request.json['knowledge_area']
-    students = request.json['students']
-    tutors = request.json['tutors']
-    create_by = request.json['create_by']
+def register_project(title, subtitle, category, knowledge_area, students, tutors, create_by):
 
     project = Project(title, subtitle, category, knowledge_area, create_by)
     db.session.add(project)
@@ -49,7 +42,7 @@ def register_project():
         db.session.commit()
         return jsonify({'message': 'resource created', 'data': project_schema.dump(project)}), 201
     except Exception as e:
-        return jsonify({'message': 'error on transaction', 'data': False}), 200
+        return jsonify({'message': f'error on transaction: {e}', 'data': False}), 200
 
 
 def get_users_from_project(project_id):
@@ -78,8 +71,7 @@ def get_users_by_project(project_id):
         return jsonify({'message': '_invalid_project_id__', 'data': False}), 200
 
 
-def get_project_by_id():
-    project_id = request.args.get('id')
+def get_project_by_id(project_id):
 
     result = Project.query.join(Category, Project.category == Category.id).join(KnowledgeArea, Project.knowledge_area ==
                                                                                 KnowledgeArea.id).add_columns(Category.name, KnowledgeArea.name).filter(Project.id == project_id).first()

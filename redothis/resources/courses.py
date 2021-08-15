@@ -14,10 +14,13 @@ def init(app):
     @bp.route('/course', methods=['GET', 'POST'])
     @jwt_required()
     def register():
+
         if request.method == 'POST':
-            return register_course()
+            name = request.json['name']
+            return register_course(name)
         else:
-            return get_course_by_id()
+            course_id = request.args.get('id')
+            return get_course_by_id(course_id)
 
     @bp.route('/courses', methods=['GET'])
     def get_courses():

@@ -1,14 +1,11 @@
 from flask import jsonify, request
 from ..extensions.database import database as db
-from ..models.course import (
-    Course,
-    course_schema,
-    courses_schema
-)
+from ..models.course import Course
+from ..models.course import course_schema
+from ..models.course import courses_schema
 
 
-def register_course():
-    name = request.json['name']
+def register_course(name):
 
     course = Course(name)
     exists_course = Course.query.filter_by(name=name).first()
@@ -34,8 +31,7 @@ def get_all_courses():
         return jsonify({'message': 'Erro', 'data': False}), 500
 
 
-def get_course_by_id():
-    course_id = request.args.get('id')
+def get_course_by_id(course_id):
 
     course = Course.query.filter_by(id=course_id).first()
 

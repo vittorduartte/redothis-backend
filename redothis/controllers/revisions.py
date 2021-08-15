@@ -1,22 +1,15 @@
 from flask import jsonify, request
 from ..extensions.database import database as db
-from ..models.revision import (
-    Revision,
-    revision_schema,
-    revisions_schema
-)
-from ..models.user import (
-    User,
-    user_schema
-)
+from ..models.revision import Revision
+from ..models.revision import revision_schema,
+from ..models.revision import revisions_schema
+from ..models.user import User
+from ..models.user import user_schema
 from ..models.course import Course
 from ..models.degree import Degree
 
-def register_revision():
-    submission_id = request.json['submission_id']
-    create_by = request.json['user_id']
-    comments = request.json['comments']
-    attachment_filepath = request.json['attachment_filepath']
+
+def register_revision(submission_id, create_by, comments, attachment_filepath):
 
     if comments is None and attachment_filepath is None:
         return jsonify({'message': 'no comments or attachments on revision', 'data': False}), 500
@@ -48,8 +41,7 @@ def get_user_from_revision(user_id):
     return None
 
 
-def get_revision_by_id():
-    revision_id = request.args.get('id')
+def get_revision_by_id(revision_id):
 
     revision = Revision.query.filter(Revision.id == revision_id).first()
 

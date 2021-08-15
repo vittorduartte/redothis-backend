@@ -8,6 +8,7 @@ def init(app):
 
     @bp.route("/oauth", methods=['POST'])
     def auth():
-        return auth_user()
+        auth = request.authorization
+        return auth_user(auth)
 
     app.register_blueprint(bp, url_prefix="/api/v1")

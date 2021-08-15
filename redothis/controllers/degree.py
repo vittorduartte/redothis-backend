@@ -1,13 +1,11 @@
 from flask import jsonify, request
 from ..extensions.database import database as db
-from ..models.degree import (
-    Degree,
-    degree_schema,
-    degrees_schema
-)
+from ..models.degree import Degree
+from ..models.degree import degree_schema
+from ..models.degree import degrees_schema
 
-def register_degree():
-    name = request.json['name']
+
+def register_degree(name):
 
     degree = Degree(name)
     exists_degree = Degree.query.filter_by(name=name).first()
@@ -32,8 +30,7 @@ def get_all_degrees():
         return jsonify({'message': err, 'data': False})
 
 
-def get_degree_by_id():
-    degree_id = request.args.get("id")
+def get_degree_by_id(degree_id):
 
     degree = Degree.query.filter_by(id=degree_id).first()
 

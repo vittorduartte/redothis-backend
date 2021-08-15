@@ -16,9 +16,16 @@ def init(app):
     @bp.route('/user', methods=['GET', 'POST'])
     def register():
         if request.method == 'POST':
-            return register_user()
+            email = request.json['email']
+            password = request.json['password']
+            name = request.json['name']
+            type_user = request.json['type_user']
+            degree = request.json['degree']
+            course = request.json['course']
+            return register_user(email, password, name, type_user, degree, course)
         else:
-            return get_user_by_email()
+            email = request.args.get('email')
+            return get_user_by_email(email)
 
     @bp.route('/course/<int:id_course>/users', methods=['GET'])
     @jwt_required()
