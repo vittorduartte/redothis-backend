@@ -1,7 +1,7 @@
 from flask import jsonify, request
 from ..extensions.database import database as db
 from ..models.revision import Revision
-from ..models.revision import revision_schema,
+from ..models.revision import revision_schema
 from ..models.revision import revisions_schema
 from ..models.user import User
 from ..models.user import user_schema
